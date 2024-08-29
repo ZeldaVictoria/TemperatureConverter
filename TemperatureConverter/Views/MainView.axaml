@@ -1,0 +1,69 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TemperatureConverter.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="250"
+             x:Class="TemperatureConverter.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	<StackPanel>
+		<Border Margin="5"
+				CornerRadius="10"
+				Background="LightBlue">
+			<TextBlock Text="Temperature Converter"
+					   FontSize="24"
+					   HorizontalAlignment="Center"
+					   Margin="5"/>
+		</Border>
+
+		<Grid ShowGridLines="False"
+			  ColumnDefinitions="100,100"
+			  RowDefinitions="Auto,Auto,Auto"
+			  HorizontalAlignment="Center"
+			  Margin="10">
+			<Label Content="Celsius"
+				   Grid.Row="0"
+				   Grid.Column="0"
+				   Margin="10"/>
+
+			<TextBox Name="celsiusTextBox"
+					 Grid.Row="0"
+					 Grid.Column="1"
+					 IsReadOnly="False"
+					 Margin="5, 5"/>
+
+			<Label Content="Fahrenheit"
+				   Grid.Row="1"
+				   Grid.Column="0"
+				   Margin="10"/>
+
+			<TextBox x:Name="fahrenheitTextBox"
+					 Grid.Row="1"
+					 Grid.Column="1"
+					 IsReadOnly="False"
+					 Margin="5, 5"/>
+
+
+			<Button Click="OnButtonClick"
+					Content="Calculate"
+					Grid.Row="3"
+					Grid.Column="1"
+					FontWeight="Medium"
+					HorizontalAlignment="Center"
+					Margin="5"/>
+
+			<Button Click="ClearButton_Click"
+					Content="Clear"
+					Grid.Row="3"
+					Grid.Column="0"
+					FontWeight="Medium"
+					HorizontalAlignment="Center"
+					Margin="5"/>
+		</Grid>
+	</StackPanel>
+</UserControl>
