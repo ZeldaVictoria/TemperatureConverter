@@ -15,25 +15,53 @@ public partial class MainView : UserControl
     private void OnButtonClick(object sender, RoutedEventArgs e)
     {
 
-        if (!string.IsNullOrWhiteSpace(celsiusTextBox.Text) && string.IsNullOrWhiteSpace(fahrenheitTextBox.Text) && (double.TryParse(celsiusTextBox.Text, out double celsiusInput)) && !celsiusTextBox.Text.Contains("."))
+        if (!string.IsNullOrWhiteSpace(celsiusTextBox.Text) && string.IsNullOrWhiteSpace(fahrenheitTextBox.Text))
         {
-            //double celsiusInput = Convert.ToDouble(celsiusTextBox.Text);
-            double celsiusToFahrenheit = celsiusInput * (9d / 5d) + 32d;
-            celsiusToFahrenheit = Math.Round(celsiusToFahrenheit, 1);
-            fahrenheitTextBox.Text = celsiusToFahrenheit.ToString();
-            fahrenheitTextBox.IsReadOnly = true;
-            celsiusTextBox.IsReadOnly = true;
+            if (celsiusTextBox.Text.Contains("."))
+            {
+                string inputToComma = celsiusTextBox.Text.Replace(".", ",");
+                double.TryParse(inputToComma, out double celsiusInput);
+                double celsiusToFahrenheit = celsiusInput * (9d / 5d) + 32d;
+                celsiusToFahrenheit = Math.Round(celsiusToFahrenheit, 1);
+                fahrenheitTextBox.Text = celsiusToFahrenheit.ToString();
+                fahrenheitTextBox.IsReadOnly = true;
+                celsiusTextBox.IsReadOnly = true;
 
-            Debug.WriteLine($"Click! Fahrenheit={fahrenheitTextBox.Text}");
+            }
+            else
+            {
+                double.TryParse(celsiusTextBox.Text, out double celsiusInput);
+                double celsiusToFahrenheit = celsiusInput * (9d / 5d) + 32d;
+                celsiusToFahrenheit = Math.Round(celsiusToFahrenheit, 1);
+                fahrenheitTextBox.Text = celsiusToFahrenheit.ToString();
+                fahrenheitTextBox.IsReadOnly = true;
+                celsiusTextBox.IsReadOnly = true;
+            }
+            
+            //Debug.WriteLine($"Click! Fahrenheit={fahrenheitTextBox.Text}");
         }
-        else if (!string.IsNullOrEmpty(fahrenheitTextBox.Text) && string.IsNullOrWhiteSpace(celsiusTextBox.Text) && (double.TryParse(fahrenheitTextBox.Text, out double fahrenheitInput)) && !fahrenheitTextBox.Text.Contains("."))
+        else if (!string.IsNullOrEmpty(fahrenheitTextBox.Text) && string.IsNullOrWhiteSpace(celsiusTextBox.Text))
         {
-            //double fahrenheitInput = Convert.ToDouble(fahrenheitTextBox.Text);
-            double fahrenheitToCelsius = (fahrenheitInput - 32d) * 5d / 9d;
-            fahrenheitToCelsius= Math.Round(fahrenheitToCelsius, 1);
-            celsiusTextBox.Text = fahrenheitToCelsius.ToString();
-            fahrenheitTextBox.IsReadOnly = true;
-            celsiusTextBox.IsReadOnly = true;
+            if (fahrenheitTextBox.Text.Contains("."))
+            {
+                string inputToComma = fahrenheitTextBox.Text.Replace(".", ",");
+                double.TryParse(inputToComma, out double fahrenheitInput);
+                double fahrenheitToCelsius = (fahrenheitInput - 32d) * 5d / 9d;
+                fahrenheitToCelsius = Math.Round(fahrenheitToCelsius, 1);
+                celsiusTextBox.Text = fahrenheitToCelsius.ToString();
+                fahrenheitTextBox.IsReadOnly = true;
+                celsiusTextBox.IsReadOnly = true;
+            }
+            else
+            {
+                double.TryParse(fahrenheitTextBox.Text, out double fahrenheitInput);
+                double fahrenheitToCelsius = (fahrenheitInput - 32d) * 5d / 9d;
+                fahrenheitToCelsius = Math.Round(fahrenheitToCelsius, 1);
+                celsiusTextBox.Text = fahrenheitToCelsius.ToString();
+                fahrenheitTextBox.IsReadOnly = true;
+                celsiusTextBox.IsReadOnly = true;
+            }
+            
         }
         else
         {
